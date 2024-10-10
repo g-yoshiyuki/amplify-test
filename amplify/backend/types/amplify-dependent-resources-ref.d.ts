@@ -1,1 +1,1 @@
-export type AmplifyDependentResourcesAttributes = Record<string, never>;
+export type AmplifyDependentResourcesAttributes = Record<string, never>
