@@ -1,0 +1,16 @@
+{
+  "whyContinueWithGen1": "Prefer not to answer",
+  "projectName": "awsproject",
+  "version": "3.1",
+  "frontend": "javascript",
+  "javascript": {
+    "framework": "next",
+    "config": {
+      "SourceDir": "src",
+      "DistributionDir": ".next",
+      "BuildCommand": "npm run build",
+      "StartCommand": "npm run start"
+    }
+  },
+  "providers": ["awscloudformation"]
+}
