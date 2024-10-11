@@ -1,7 +1,11 @@
 import Image from 'next/image'
 import styles from './page.module.css'
+import { getBlogs } from '@/lib/microcms'
+import { SanitizedContent } from '@/components/SanitizedContent'
 
-export default function Home() {
+export default async function Home() {
+  const blogs = await getBlogs()
+
   return (
     <div className={styles.page}>
       <main className={styles.main}>
@@ -19,31 +23,17 @@ export default function Home() {
           </li>
           <li>Save and see your changes instantly.</li>
         </ol>
-
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
+        {/* microcmsのブログを表示 */}
+        <div className="blogContent">
+          {blogs.map((blog) => (
+            <article key={blog.id}>
+              <h2>{blog.title}</h2>
+              <p>
+                公開日: {new Date(blog.publishedAt).toLocaleDateString('ja-JP')}
+              </p>
+              <SanitizedContent content={blog.content} />
+            </article>
+          ))}
         </div>
       </main>
       <footer className={styles.footer}>
